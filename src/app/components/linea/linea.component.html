@@ -1,0 +1,11 @@
+<div class="row">
+    <button style="top: 0px; position: relative;z-index: 2;" class="btn btn-primary btn-block" (click)="actualizarData()">CLICK</button>
+    <div>
+
+        <div>
+            <!-- <div style="display: block;"> -->
+
+            <canvas baseChart class="tabla" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+        </div>
+    </div>
+</div>

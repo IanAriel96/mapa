@@ -1,0 +1,8 @@
+.tabla {
+    position: absolute;
+    width: 30px;
+    height: 40px;
+    // se desplaza la tabla con el contenido en caso de que exista mas informacion
+    bottom: 10%;
+    // align-self: center;
+}

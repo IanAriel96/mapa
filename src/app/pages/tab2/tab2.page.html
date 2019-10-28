@@ -1,0 +1,33 @@
+<mat-toolbar color="primary">
+    <span>Medidas de protección</span>
+</mat-toolbar>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- <table id="websendeos"> este es el id del metodo responsive que busque-->
+    <!-- UV Column -->
+    <ng-container matColumnDef="uv">
+        <th style="box-sizing:content-box; width: 15%; padding-left: 0%" mat-header-cell *matHeaderCellDef> <strong>  UV </strong> </th>
+        <td style="box-sizing:content-box; width: 15%; padding-left: 0%" mat-cell *matCellDef="let element"> {{element.uv}} </td>
+    </ng-container>
+    <!-- se agrego width a UV debido a que el ancho de la columna era muy poco y se distorsionaba el texto-->
+
+    <!-- Riesgo Column -->
+    <ng-container matColumnDef="riesgo">
+        <th style="width: 15%  " mat-header-cell *matHeaderCellDef> <strong>Riesgo </strong></th>
+        <td style="width: 15% ; border-right: silver 1px solid; border-left: silver 1px solid " mat-cell *matCellDef="let element"> {{element.riesgo}} </td>
+    </ng-container>
+
+    <!-- Exposicion Column -->
+    <ng-container matColumnDef="exposicion">
+        <th mat-header-cell *matHeaderCellDef> <strong>Tiempo de exposicion [min] </strong></th>
+        <td style="border-right: silver 1px solid" mat-cell *matCellDef="let element"> {{element.exposicion}} </td>
+    </ng-container>
+
+    <!-- Description Column -->
+    <ng-container matColumnDef="description">
+        <th style="padding-right: 2%; padding-left: 2%" mat-header-cell *matHeaderCellDef> <strong>Descripcion </strong></th>
+        <td style="padding-right: 2%; padding-left: 2%" mat-cell *matCellDef="let element"> {{element.description}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let rowData; columns: displayedColumns;"></tr>
+</table>

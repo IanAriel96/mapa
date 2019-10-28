@@ -1,0 +1,30 @@
+<mat-toolbar color="primary" class="material-toolbar">
+    <span>Mapa Solar</span>
+</mat-toolbar>
+<mat-card class="material-card">
+    <!-- <mat-card-title>Mapa Solar</mat-card-title> -->
+
+    <mat-card-content width="100%" height="100%">
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="14">
+            <agm-marker *ngFor="let marcador of marcadoresBase; let i = index" [latitude]="marcador.latitud" [longitude]="marcador.longitud">
+                <agm-polygon *ngFor="let poligono of poligonos" [paths]="poligono.paths" [fillColor]="poligono.color" [fillOpacity]="0.03" [strokeColor]="poligono.color"></agm-polygon>
+                <agm-info-window>
+                    <div>
+                        <strong>Ubicacion:</strong> {{marcador.ubicacion}}
+                    </div>
+                    <p>
+                        <strong>Indice UV:</strong> {{marcador.uv}}
+                    </p>
+                    <p>
+                        <strong>Hora:</strong> {{marcador.hora}}
+                    </p>
+                    <u style="color:blue" routerLink="/tabs/tab2">Ver mas.. </u>
+                </agm-info-window>
+
+
+            </agm-marker>
+        </agm-map>
+
+    </mat-card-content>
+
+</mat-card>
