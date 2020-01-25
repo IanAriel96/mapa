@@ -23,9 +23,7 @@ const ELEMENT_DATA: Element[] = [
     uv: '0 a 2',
     riesgo: 'Bajo',
     exposicion: 60,
-    description: `Puede permanecer en el exterior sin riesgo
-    Gafas de sol en dias brillantes
-    No cambia nada`
+    description: 'Puede permanecer en el exterior sin riesgo.Gafas de sol en dias brillantes'
   }, {
     uv: '3 a 5',
     riesgo: 'Moderado',
@@ -35,12 +33,12 @@ const ELEMENT_DATA: Element[] = [
     uv: '6 a 7',
     riesgo: 'Alto',
     exposicion: 30,
-    description: `Utilice gorra, crema con filtro, gafas y sombrero + "<br>"Cuidado con bebes`
+    description: `Utilice gorra, crema con filtro, gafas y sombrero. Cuidado con bebes`
   }, {
     uv: '8 a 10',
     riesgo: 'Muy Alto',
     exposicion: 25,
-    description: `Utilice gorra, crema con filtro, gafas y sombrero <br> Procure no exponerse al sol`
+    description: `Utilice gorra, crema con filtro, gafas y sombrero. Procure no exponerse al sol`
   }, {
     uv: '11+',
     riesgo: 'Extremo',

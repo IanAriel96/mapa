@@ -17,6 +17,17 @@ export class RadiacionService {
   }
   getRecientes() {
     return this.http.get<RespuestaRadiacion>(`${URL}/api/recientes`);
-
+  }
+  getSemanal() {
+    return this.http.get<RespuestaRadiacion>(`${URL}/api/semanal`);
+  }
+  getMes() {
+    return this.http.get<RespuestaRadiacion>(`${URL}/api/mes`);
+  }
+  getMaxSemanal() {
+    return this.http.get<RespuestaRadiacion>(`${URL}/api/maxsemanal`);
+  }
+  getMaxMes() {
+    return this.http.get<RespuestaRadiacion>(`${URL}/api/maxmes`);
   }
 }

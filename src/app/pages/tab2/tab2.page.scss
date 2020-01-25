@@ -1,9 +1,20 @@
 table {
-    height: 350px;
-    width: 510px;
-    position: relative; // se desplaza la tabla con el contenido en caso de que exista mas informacion
-    bottom: auto;
-    align-self: center;
+    // height: 350px;
+    // width: 510px;
+    height: auto;
+    width: auto;
+    position: absolute; // se desplaza la tabla con el contenido en caso de que exista mas informacion
+    top: 1%;
+}
+
+.my-custom-scrollbar {
+    position: relative;
+    height: 500px;
+    overflow: auto;
+}
+
+.table-wrapper-scroll-y {
+    display: block;
 }
 
 table tr:nth-child(1) {
@@ -36,8 +47,3 @@ table th {
     color: white;
     text-align: center
 }
-
-// html,
-// body {
-//     margin: 0px;
-// }

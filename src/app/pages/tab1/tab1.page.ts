@@ -4,8 +4,7 @@ import { Poligono } from '../../classes/poligono.class';
 import { LatLngLiteral} from '@agm/core';
 import { RadiacionService } from '../../services/radiacion.service';
 import { Radiacion } from '../../interfaces/interfaces';
-import { interval, fromEvent } from 'rxjs';
-
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-tab1',
@@ -13,38 +12,35 @@ import { interval, fromEvent } from 'rxjs';
   styleUrls: ['tab1.page.scss']
 })
 
-
 export class Tab1Page implements OnInit {
   public radiacion: Radiacion[] = []; // array del tipo radiacion que almacena objetos JSON
   public marcadoresBase: Marcador[] = []; // marcadores de la base como objetos JavaScript
   public poligonos: Array<Poligono> = [];
-  public lat = -0.211; // esta informacion es utilizada para mostrar la lat y lng del donde queremos el mapa
+  public lat = -0.211; // esta informacion es utilizada para mostrar la lat y lng del donde queremos el mapa en el inicio de pantalla
   public lng = -78.5;
   public moment = require('moment'); // sera utilizada para hacer el cambio de json.hora a una variable moment ya que con Date no vale
 
   constructor(private RadiacionService: RadiacionService,
-              // private markerManager: MarkerManager,
-              // private mapWrapper: GoogleMapsAPIWrapper
     ) {
 }
   ngOnInit() {
-    // const contador = interval(5000);
-    // contador.subscribe((n) => {
-    //   this.funcionAsync().then(result => console.log(result)).catch(e => console.log (`Error capturadoo:${e}`));
-    //   console.log(`cada ${n} segundos`);
-    // });
     this.RadiacionService.getRecientes().subscribe(resp => {  // antigua forma de solicitar el servicio
       this.radiacion.push( ...resp.radiacion);
       this.mapJsonToObject(this.radiacion, this.marcadoresBase);
       this.dibujarPoligono(this.marcadoresBase, this.poligonos);
     });
+    const contador = interval(1800000); // 1800000 es cada 30 min y 3600000 es 1 hora
+    contador.subscribe((n) => {
+      this.funcionAsync().then(result => console.log(result)).catch(e => console.log (`Error capturadoo:${e}`));
+    });
   }
   public funcionAsync = async () => {
     try {
     await this.RadiacionService.getRecientes().subscribe(resp => { // await quiere decir espera a una promesa de forma asincrona en este caso la promesa es la resp de la BD
-     // console.log('antes de limpiar radiacion:', this.radiacion);
+      this.radiacion = []; // importante resetear los array caso contrario en la func asincrona se superpondra las muestras recientes
+      this.poligonos = []; // importante resetear los array caso contrario en la func asincrona se superpondra las muestras recientes
+      this.marcadoresBase = []; // importante resetear los array caso contrario en la func asincrona se superpondra las muestras recientes
       this.radiacion.push(...resp.radiacion);
-     // console.log('despues de actualizar radiacion:', this.radiacion);
       this.mapJsonToObject(this.radiacion, this.marcadoresBase);
       this.dibujarPoligono(this.marcadoresBase, this.poligonos);
     });
@@ -55,10 +51,8 @@ export class Tab1Page implements OnInit {
     }
   }
   public mapJsonToObject(jsonObject, marcadores) {
-   // console.log('serviceObject', jsonObject);
     for (const json of jsonObject ) {
       let fecha = this.moment(json.hora); // Se transforma a moment debido a que esta es la unica variable que no me reconoce como Date pasandolo del json a js
-      // fecha = fecha.setMinutes(fecha.getMinutes() + fecha.getTimezoneOffset());
       const marcador = new Marcador(json.latitud, json.longitud, json.ubicacion, json.uv, fecha, json.coordenadas, json.color);
       marcadores.push(marcador);
     }
@@ -79,10 +73,4 @@ export class Tab1Page implements OnInit {
     poligonos.push(poligono);
     }
   }
-  // public deleteMarker(){
-
-  //   const resetMarcadores: any = {
-  //     setMap:
-  //   }
-  // }
 }

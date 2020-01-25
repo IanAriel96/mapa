@@ -1,8 +1,21 @@
-.tabla {
-    position: absolute;
-    width: 30px;
-    height: 40px;
-    // se desplaza la tabla con el contenido en caso de que exista mas informacion
-    bottom: 10%;
-    // align-self: center;
+.my-custom-scrollbar {
+    position: relative;
+    height: 300px;
+    overflow: auto;
+}
+
+.table-wrapper-scroll-y {
+    display: block;
+}
+
+body {
+    background: #1D1F20;
+    padding: 16px;
+}
+
+.chart-container {
+    position: relative;
+    margin: auto;
+    height: 80vh;
+    width: 80vw;
 }
