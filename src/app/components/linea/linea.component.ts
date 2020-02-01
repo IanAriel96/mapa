@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-linea',
@@ -42,6 +43,10 @@ export class LineaComponent implements OnInit  {
  public lineChartColors: Array<any> = [];
  public lineChartLegend = true;
  public lineChartType = 'line';
+
+ constructor(private dataService: DataService) {
+
+ }
 
  public distinct(value: any, index: any, self: any) {  // metodo para realizar el proceso distinct
   return self.indexOf(value) === index;
@@ -308,7 +313,22 @@ public MaxMes(): void {
   public chartHovered(e: any): void {
     console.log(e);
   }
-  ngOnInit() {
 
+  ngOnInit() {
+    this.dataService.dibujarHoy.subscribe(() => {
+      this.actualizarData();
+    });
+    this.dataService.dibujarSemana.subscribe(() => {
+      this.actualizarSemana();
+    });
+    this.dataService.dibujarMes.subscribe(() => {
+      this.actualizarMes();
+    });
+    this.dataService.dibujarMaxSemana.subscribe(() => {
+      this.MaxSemana();
+    });
+    this.dataService.dibujarMaxMes.subscribe(() => {
+      this.MaxMes();
+    });
   }
 }

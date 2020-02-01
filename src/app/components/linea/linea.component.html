@@ -1,21 +1,18 @@
-<!-- <div>
-    <h2 style="top: 0;">Gráfica Dinámica</h2>
-</div> -->
-<div class="chart-container my-custom-scrollbar ">
-    <canvas baseChart class="my-4 chartjs-render-monitor" id="chart" width="1216" height="1500" style=" height: auto; width: auto; align-self: center;" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors"
-        [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
-
-
-    <div> Promedio UV:
-        <!-- <h3 style="color: black;">Radiación UV Promedio:</h3> -->
-        <button type="button" class="btn btn-warning btn-sm " style="margin:10px; width:100px" (click)="actualizarData()">Hoy</button>
-        <button type="button" class="btn btn-warning btn-sm " style="margin:10px; width:100px" (click)="actualizarSemana()">Semana</button>
-        <button type="button" class="btn btn-warning btn-sm " style="margin:10px; width:100px" (click)="actualizarMes()">Mes</button>
-    </div>
-    <div> Picos:
-        <!-- <h3 style="color: black;">Picos Máximos:</h3> -->
-        <button type="button" class="btn btn-danger btn-sm " style="margin:10px; width:100px" (click)="MaxSemana()">Semana</button>
-        <button type="button" class="btn btn-danger btn-sm " style="margin:10px; width:100px" (click)="MaxMes()">Mes</button>
-    </div>
-    <div></div>
+<div>
+    <h2 style="align-self: center;border: 10px;margin: 10px; font-style: oblique; color:crimson ;">
+        Sensores de la ciudad de Quito</h2>
+    <canvas baseChart class="mychart" id="chart" width="100%" height="100%" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)">
+    </canvas>
 </div>
+<!-- <p style="align-self: center;border: 0px;margin: 0px;">Promedio UV:</p>
+    <div>
+        <button type="button" class="btn btn-warning btn-sm " style="margin:5px; width:100px" (click)="actualizarData()">Hoy</button>
+        <button type="button" class="btn btn-warning btn-sm " style="margin:5px; width:100px" (click)="actualizarSemana()">Semana</button>
+        <button type="button" class="btn btn-warning btn-sm " style="margin:5px; width:100px" (click)="actualizarMes()">Mes</button>
+    </div>
+    <p style="align-self: center;border: 0px;margin: 0px;">Picos UV:</p>
+    <div>
+        <button type="button" class="btn btn-danger btn-sm " style="margin:5px; width:100px" (click)="MaxSemana()">Semana</button>
+        <button type="button" class="btn btn-danger btn-sm " style="margin:5px; width:100px" (click)="MaxMes()">Mes</button>
+    </div> -->

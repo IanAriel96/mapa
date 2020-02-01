@@ -1,7 +1,8 @@
 <mat-toolbar color="primary">
     <span class="font-italic">Medidas de protección</span>
 </mat-toolbar>
-<div class="table-wrapper-scroll-y my-custom-scrollbar ">
+<!-- <div class="table-wrapper-scroll-y my-custom-scrollbar "> -->
+<div class="content">
     <table mat-table [dataSource]="dataSource" class="mx-auto mat-elevation-z8">
         <!-- <table id="websendeos"> este es el id del metodo responsive que busque-->
         <!-- UV Column -->
@@ -28,7 +29,6 @@
             <th style="padding-right: 2%; padding-left: 2%" mat-header-cell *matHeaderCellDef> <strong>Descripcion </strong></th>
             <td style="padding-right: 2%; padding-left: 2%" mat-cell *matCellDef="let element"> {{element.description}} </td>
         </ng-container>
-
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let rowData; columns: displayedColumns;"></tr>
     </table>

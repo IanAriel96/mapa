@@ -1,21 +1,11 @@
-.my-custom-scrollbar {
-    position: relative;
-    height: 300px;
-    overflow: auto;
-}
-
-.table-wrapper-scroll-y {
-    display: block;
-}
-
 body {
     background: #1D1F20;
     padding: 16px;
 }
 
-.chart-container {
+.mychart {
     position: relative;
-    margin: auto;
-    height: 80vh;
-    width: 80vw;
+    display: block;
+    margin-top: 20px;
+    overflow: auto;
 }

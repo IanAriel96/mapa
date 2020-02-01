@@ -16,7 +16,6 @@ import { MaterialModule } from './material.module';
 
 import { HttpClientModule } from '@angular/common/http'; // para hacer peticiones http
 
-import { MapaEditarComponent } from './components/mapa-editar/mapa-editar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 // Graficos
@@ -24,16 +23,15 @@ import { ChartsModule } from 'ng2-charts';
 
 // metodo setInterval para funciones asyncronicas
 // import { setIntervalAsync } from 'set-interval-async/dynamic';
+import { DataService } from './services/data.service';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    MapaEditarComponent,
   ],
   entryComponents: [
-    MapaEditarComponent,
   ],
   imports: [BrowserModule,
     IonicModule.forRoot(),
@@ -45,6 +43,7 @@ import { ChartsModule } from 'ng2-charts';
     ChartsModule,
   ],
   providers: [
+    DataService,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

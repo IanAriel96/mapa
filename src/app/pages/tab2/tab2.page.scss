@@ -1,20 +1,16 @@
 table {
-    // height: 350px;
-    // width: 510px;
-    height: auto;
-    width: auto;
-    position: absolute; // se desplaza la tabla con el contenido en caso de que exista mas informacion
-    top: 1%;
+    position: relative; // no usamos relative xq se mantuviera el flujo al mover con top 50
+    width: 90vw;
+    top: 50%; // usamos esto para empujar desde arriba 50% respectivo al div
+    transform: translateY(-50%); // alineamos a la mitad la tabla respecto a lo que se empujo
 }
 
-.my-custom-scrollbar {
+.content {
     position: relative;
-    height: 500px;
-    overflow: auto;
-}
-
-.table-wrapper-scroll-y {
     display: block;
+    width: 100vw;
+    height: 150vh;
+    overflow: auto;
 }
 
 table tr:nth-child(1) {

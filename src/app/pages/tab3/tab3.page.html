@@ -1,10 +1,9 @@
-<div>
+<!-- <div>
     <mat-toolbar color="primary">
         <span class="font-italic ">Resumen UV</span>
     </mat-toolbar>
-</div>
-<!-- <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-    <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"></div>
-    <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"></div>
 </div> -->
-<app-linea [datos]="dataLineas" [semanal]="semanal" [mensual]="mensual" [maxsemanal]="maxsemanal" [maxmensual]="maxmensual" style="text-align: center; top:56px" class="fixed-top"></app-linea>
+<div class="chart-container ">
+    <app-navbar></app-navbar>
+    <app-linea [datos]="dataLineas" [semanal]="semanal" [mensual]="mensual" [maxsemanal]="maxsemanal" [maxmensual]="maxmensual"></app-linea>
+</div>

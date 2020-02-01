@@ -22,7 +22,6 @@ export class Tab3Page implements OnInit {
   maxmensual: Array<any>[] = [];
   maxsemanal: Array<any>[] = [];
   dataLineas: Array<any>[] = []; // marcadores de la base como objetos JavaScript
-
   constructor(private RadiacionService: RadiacionService) {
   }
   ngOnInit() {
