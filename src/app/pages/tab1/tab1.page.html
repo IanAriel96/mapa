@@ -1,5 +1,5 @@
-<mat-toolbar color="primary" class="material-toolbar ">
-    <span class="font-italic">Mapa Solar</span>
+<mat-toolbar color="primary" padding=20px>
+    <span class="font-italic">Mapa</span>
 </mat-toolbar>
 <div class="container-12">
     <mat-card class="material-card">
@@ -9,7 +9,10 @@
                     <agm-polygon *ngFor="let poligono of poligonos" [paths]="poligono.paths" [fillColor]="poligono.color" [fillOpacity]="0.03" [strokeColor]="poligono.color"></agm-polygon>
                     <agm-info-window>
                         <p>
-                            <strong>Ubicacion:</strong> {{marcador.ubicacion}}
+                            <strong>Sector:</strong> {{marcador.ubicacion}}
+                        </p>
+                        <p>
+                            <strong> Latitud:</strong> {{marcador.latitud}} <strong> Longitud:</strong> {{marcador.longitud}}
                         </p>
                         <p>
                             <strong>Indice UV:</strong> {{marcador.uv}}

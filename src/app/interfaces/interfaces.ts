@@ -12,3 +12,9 @@ export interface Radiacion {
   coordenadas: number [];
 }
 
+export interface Element {
+  uv: string;
+  riesgo: string;
+  exposicion: number;
+  description: string;
+}

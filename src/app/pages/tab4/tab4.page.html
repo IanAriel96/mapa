@@ -1,0 +1,29 @@
+<body>
+    <mat-toolbar color="primary">
+        <span class="font-italic">Administrador</span>
+    </mat-toolbar>
+    <section>
+        <div [hidden]="mostrar" class="div1">
+            <ion-title>Login Administrador</ion-title>
+            <ion-list>
+                <ion-item>
+                    <ion-input placeholder="Nombre de administrador" [(ngModel)]="username"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-input placeholder="Password" type="password" [(ngModel)]="password"></ion-input>
+                </ion-item>
+            </ion-list>
+            <ion-button expand="block" (click)="presentAlert()">Ingresar</ion-button>
+        </div>
+    </section>
+    <div [hidden]="!mostrar">
+        <h2>Configuraciones</h2>
+        <ion-list style="background-color: papayawhip;">
+            <ion-item>
+                <ion-label>Radio Hexágonos: </ion-label>
+                <ion-input class="font-italic" type="number" placeholder="Ingrese el radio en km" [(ngModel)]=radio></ion-input>
+            </ion-item>
+        </ion-list>
+        <ion-button expand="block" (click)="actualizarRadio()">Actualizar</ion-button>
+    </div>
+</body>

@@ -30,4 +30,19 @@ export class RadiacionService {
   getMaxMes() {
     return this.http.get<RespuestaRadiacion>(`${URL}/api/maxmes`);
   }
+  cambiarRadio(dato: number) {
+    const radio = {dato};
+    return new Promise( resolve => {
+      this.http.post(`${URL}/api/radio`, radio)
+      .subscribe(resp => {
+        if (resp['ok']) {
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      });
+    });
+  }
+
+
 }

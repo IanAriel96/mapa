@@ -1,13 +1,9 @@
-import { Injectable, Output, EventEmitter } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
-
-
-
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-
   dibujarHoy = new EventEmitter();
   dibujarSemana = new EventEmitter();
   dibujarMes = new EventEmitter();

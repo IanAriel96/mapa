@@ -8,7 +8,6 @@ import { Tab3Page } from './tab3.page';
 import { MaterialModule } from '../../material.module';
 import { ComponentsModule } from '../../components/components.module';
 
-
 @NgModule({
   imports: [
     ComponentsModule,

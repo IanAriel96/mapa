@@ -1,10 +1,6 @@
 import { Component } from '@angular/core';
-export interface Element {
-  uv: string;
-  riesgo: string;
-  exposicion: number;
-  description: string;
-}
+import { Element } from '../../interfaces/interfaces';
+
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -12,12 +8,8 @@ export interface Element {
 })
 export class Tab2Page {
   displayedColumns: string[] = ['uv', 'riesgo', 'exposicion', 'description'];
-  // tslint:disable-next-line: no-use-before-declare
   dataSource = ELEMENT_DATA;
- // constructor() {}
 }
-// var ejemplo =document.write("<ul>hola este es un ejemplo <li>separando para ver si funciona</li> </ul>");
-// console.log(ejemplo);
 const ELEMENT_DATA: Element[] = [
   {
     uv: '0 a 2',
