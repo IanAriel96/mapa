@@ -7,6 +7,9 @@ import { IonicModule } from '@ionic/angular';
 
 import { Tab4Page } from './tab4.page';
 import { MaterialModule } from '../../material.module';
+import { PapaParseModule } from 'ngx-papaparse';
+import { File } from '@ionic-native/file/ngx';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 const routes: Routes = [
   {
@@ -21,7 +24,12 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     MaterialModule,
+    PapaParseModule,
     RouterModule.forChild(routes)
+  ],
+  providers: [
+    File,
+    SocialSharing
   ],
   declarations: [Tab4Page]
 })

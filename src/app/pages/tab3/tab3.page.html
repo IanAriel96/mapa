@@ -1,4 +1,12 @@
-<div class="chart-container ">
-    <app-navbar></app-navbar>
-    <app-linea [datos]="dataLineas" [semanal]="semanal" [mensual]="mensual" [maxsemanal]="maxsemanal" [maxmensual]="maxmensual"></app-linea>
+<app-navbar>
+</app-navbar>
+<h2 style="align-self: center;border: 10px;margin: 10px; font-style: oblique; color:crimson ;">
+    Sensores de la ciudad de Quito</h2>
+<div>
+    <ion-item color='papayawhip'>
+        <ion-datetime class="font-italic" style="background-color:peachpuff ;border: red 3px solid;width: 100%; text-align: center;" placeholder="Ver calendario: {{ calendar | date: 'MMM dd, yyyy'}} " (ionChange)="cambioFecha( $event)"></ion-datetime>
+    </ion-item>
+</div>
+<div id="map" style="overflow: auto;">
+    <app-linea [hoy]="arrayHoy" [datos]="dataLineas" [semanal]="semanal" [mensual]="mensual" [maxsemanal]="maxsemanal" [maxmensual]="maxmensual"></app-linea>
 </div>

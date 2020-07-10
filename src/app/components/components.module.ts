@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LineaComponent } from './linea/linea.component';
 import { ChartsModule } from 'ng2-charts';
 import { NavbarComponent } from './navbar/navbar.component';
+import { IonicModule } from '@ionic/angular';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { NavbarComponent } from './navbar/navbar.component';
   ],
   imports: [
     CommonModule,
-    ChartsModule
+    ChartsModule,
+    IonicModule
   ]
 })
 export class ComponentsModule { }

@@ -1,10 +1,12 @@
 <body>
-    <mat-toolbar color="primary">
-        <span class="font-italic">Administrador</span>
-    </mat-toolbar>
-    <section>
-        <div [hidden]="mostrar" class="div1">
-            <ion-title>Login Administrador</ion-title>
+    <ion-header>
+        <ion-toolbar color="primary" style="padding: 0; padding-top: 1vh; ">
+            <ion-title class="font-italic">Administrador</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <section [hidden]="mostrar">
+        <div class="div1">
+            <h3>Login Administrador</h3>
             <ion-list>
                 <ion-item>
                     <ion-input placeholder="Nombre de administrador" [(ngModel)]="username"></ion-input>
@@ -17,13 +19,32 @@
         </div>
     </section>
     <div [hidden]="!mostrar">
-        <h2>Configuraciones</h2>
+        <h2><strong>Configuraciones</strong></h2>
         <ion-list style="background-color: papayawhip;">
             <ion-item>
                 <ion-label>Radio Hexágonos: </ion-label>
-                <ion-input class="font-italic" type="number" placeholder="Ingrese el radio en km" [(ngModel)]=radio></ion-input>
+                <ion-input class="font-italic" type="number" placeholder="Ingrese el radio" [(ngModel)]=radio></ion-input>
+                <ion-button expand="block" (click)="actualizarRadio()">Actualizar</ion-button>
             </ion-item>
         </ion-list>
-        <ion-button expand="block" (click)="actualizarRadio()">Actualizar</ion-button>
+    </div>
+    <div [hidden]="!mostrar">
+        <h3>Descargar archivo de resumen UV: </h3>
+        <ion-item color='papayawhip'>
+            <ion-datetime class="font-italic" style="background-color:peachpuff ;border:royalblue  3px solid;width: 100%; text-align: center;" placeholder="Ver calendario: {{ calendar | date: 'MMM dd, yyyy'}} " (ionChange)="cambioFecha( $event)"></ion-datetime>
+        </ion-item>
+    </div>
+    <h3 [hidden]="!mostrar">Log de errores:</h3>
+    <div [hidden]="!mostrar" class="content">
+        <ion-list>
+            <ion-infinite-scroll-content direction="x" class="wide-as-needed">
+                <div id="content2">
+                    <ion-item *ngFor="let error of listaErrores; let i = index">
+                        <ion-label> <strong>{{i+1}}. Nombre:</strong>{{error.nombre}}, <strong>Mensaje:</strong> {{error.mensaje}} <strong>Fecha:</strong>{{error.fecha}} </ion-label>
+                    </ion-item>
+                </div>
+            </ion-infinite-scroll-content>
+        </ion-list>
+        <ion-button color="primary" expand="block" (click)="limpiarLista()">Limpiar Log</ion-button>
     </div>
 </body>

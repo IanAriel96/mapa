@@ -25,7 +25,8 @@ import { ChartsModule } from 'ng2-charts';
 // import { setIntervalAsync } from 'set-interval-async/dynamic';
 import { DataService } from './services/data.service';
 
-
+// notifications
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { DataService } from './services/data.service';
     DataService,
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    LocalNotifications
   ],
   bootstrap: [AppComponent]
 })

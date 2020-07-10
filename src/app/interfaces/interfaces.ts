@@ -10,6 +10,7 @@ export interface Radiacion {
   latitud: number;
   longitud: number;
   coordenadas: number [];
+  color: string;
 }
 
 export interface Element {

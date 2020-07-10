@@ -12,8 +12,9 @@ export class RadiacionService {
 
   constructor(private http: HttpClient) { }
 
-  getRadiacion() {
-    return this.http.get<RespuestaRadiacion>(`${URL}/api/radiacion`);
+  getRadiacion(calendar: Date) {
+    const dato = {calendar};
+    return this.http.post<RespuestaRadiacion>(`${URL}/api/radiacion`, dato);
   }
   getRecientes() {
     return this.http.get<RespuestaRadiacion>(`${URL}/api/recientes`);
@@ -30,6 +31,9 @@ export class RadiacionService {
   getMaxMes() {
     return this.http.get<RespuestaRadiacion>(`${URL}/api/maxmes`);
   }
+  getErrores() {
+    return this.http.get<any>(`${URL}/api/errores`);
+  }
   cambiarRadio(dato: number) {
     const radio = {dato};
     return new Promise( resolve => {
@@ -43,6 +47,7 @@ export class RadiacionService {
       });
     });
   }
-
-
+  getLimpiar() {
+    return this.http.get<any>(`${URL}/api/limpiar`);
+  }
 }

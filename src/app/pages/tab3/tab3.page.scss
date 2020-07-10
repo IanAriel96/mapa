@@ -1,7 +1,11 @@
-.chart-container {
-    display: block;
-    height: 85vh;
-    width: 100vw;
-    overflow: auto;
-    text-align: center;
+html,
+body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#map {
+    height: 100%;
 }

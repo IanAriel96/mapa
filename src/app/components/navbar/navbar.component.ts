@@ -16,7 +16,6 @@ export class NavbarComponent  {
     this.dataService.Semana();
   }
   clickMes() {
-    console.log('Entro al click mes');
     this.dataService.Mes();
   }
   clickMaxSemana() {

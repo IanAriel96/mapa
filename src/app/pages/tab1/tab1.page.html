@@ -1,29 +1,27 @@
-<mat-toolbar color="primary" padding=20px>
-    <span class="font-italic">Mapa</span>
-</mat-toolbar>
-<div class="container-12">
-    <mat-card class="material-card">
-        <mat-card-content width="100%" height="100%">
-            <agm-map [latitude]="lat" [longitude]="lng" [zoom]="14">
-                <agm-marker *ngFor="let marcador of marcadoresBase; let i = index" [latitude]="marcador.latitud" [longitude]="marcador.longitud">
-                    <agm-polygon *ngFor="let poligono of poligonos" [paths]="poligono.paths" [fillColor]="poligono.color" [fillOpacity]="0.03" [strokeColor]="poligono.color"></agm-polygon>
-                    <agm-info-window>
-                        <p>
-                            <strong>Sector:</strong> {{marcador.ubicacion}}
-                        </p>
-                        <p>
-                            <strong> Latitud:</strong> {{marcador.latitud}} <strong> Longitud:</strong> {{marcador.longitud}}
-                        </p>
-                        <p>
-                            <strong>Indice UV:</strong> {{marcador.uv}}
-                        </p>
-                        <p>
-                            <strong>Fecha y Hora:</strong> {{marcador.hora}}
-                        </p>
-                        <u style="color:blue" routerLink="/tabs/tab2">Ver mas.. </u>
-                    </agm-info-window>
-                </agm-marker>
-            </agm-map>
-        </mat-card-content>
-    </mat-card>
+<ion-header>
+    <ion-toolbar color="primary" style="padding: 0; padding-top: 1vh;">
+        <ion-title class="font-italic">Mapa</ion-title>
+    </ion-toolbar>
+</ion-header>
+<div id="map">
+    <agm-map [latitude]="lat " [longitude]="lng " [zoom]="14 ">
+        <agm-marker *ngFor="let marcador of marcadoresBase " [latitude]="marcador.latitud " [longitude]="marcador.longitud ">
+            <agm-polygon *ngFor="let poligono of poligonos " [paths]="poligono.paths " [fillColor]="poligono.colorFilo " [fillOpacity]="0.03 " [strokeColor]="poligono.color "></agm-polygon>
+            <agm-info-window>
+                <p>
+                    <strong>Sector:</strong> {{marcador.ubicacion}}
+                </p>
+                <p>
+                    <strong> Latitud:</strong> {{marcador.latitud}} <strong> Longitud:</strong> {{marcador.longitud}}
+                </p>
+                <p>
+                    <strong>Indice UV:</strong> {{marcador.uv}}
+                </p>
+                <p>
+                    <strong>Fecha y Hora:</strong> {{marcador.hora}}
+                </p>
+                <!-- <u style="color:blue " routerLink="/tabs/tab2 ">Ver mas.. </u> -->
+            </agm-info-window>
+        </agm-marker>
+    </agm-map>
 </div>

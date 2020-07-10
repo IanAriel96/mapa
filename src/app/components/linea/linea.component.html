@@ -1,18 +1,5 @@
 <div>
-    <h2 style="align-self: center;border: 10px;margin: 10px; font-style: oblique; color:crimson ;">
-        Sensores de la ciudad de Quito</h2>
-    <canvas baseChart class="mychart" id="chart" width="100%" height="100%" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)"
-        (chartClick)="chartClicked($event)">
+    <canvas baseChart height="100vh" width="100vw" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartClick)="chartClicked($event)">
     </canvas>
 </div>
-<!-- <p style="align-self: center;border: 0px;margin: 0px;">Promedio UV:</p>
-    <div>
-        <button type="button" class="btn btn-warning btn-sm " style="margin:5px; width:100px" (click)="actualizarData()">Hoy</button>
-        <button type="button" class="btn btn-warning btn-sm " style="margin:5px; width:100px" (click)="actualizarSemana()">Semana</button>
-        <button type="button" class="btn btn-warning btn-sm " style="margin:5px; width:100px" (click)="actualizarMes()">Mes</button>
-    </div>
-    <p style="align-self: center;border: 0px;margin: 0px;">Picos UV:</p>
-    <div>
-        <button type="button" class="btn btn-danger btn-sm " style="margin:5px; width:100px" (click)="MaxSemana()">Semana</button>
-        <button type="button" class="btn btn-danger btn-sm " style="margin:5px; width:100px" (click)="MaxMes()">Mes</button>
-    </div> -->
+<!-- (chartHover)="chartHovered($event)" -->

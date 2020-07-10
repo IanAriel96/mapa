@@ -7,18 +7,19 @@ import { DataService } from '../../services/data.service';
   styleUrls: ['./linea.component.scss'],
 })
 export class LineaComponent implements OnInit  {
-  @Input() datos; // contiene el array de JSON recientes conformado: ubicacion, uv, hora
-  @Input() semanal; // contiene el array de JSON recientes conformado: ubicacion, uv resumen sem, hora
-  @Input() mensual; // contiene el array de JSON recientes conformado: ubicacion, uv resum men, hora
-  @Input() maxsemanal; // contiene el array de JSON recientes conformado: ubicacion, uv max sem, hora
-  @Input() maxmensual; // contiene el array de JSON recientes conformado: ubicacion, uv max men, hora
-  public moment = require('moment'); // en la page 3 esta hora en formato moment de los objs
+  @Input() datos; // contiene el array de JSON de radiacion conformado: ubicacion, uv, hora
+  @Input() hoy; // contiene el array de JSON de las muestras de hoy conformado: ubicacion, uv, hora
+  @Input() semanal; // contiene el array de JSON de semanal conformado: ubicacion, uv resumen sem, hora
+  @Input() mensual; // contiene el array de JSON de mensual conformado: ubicacion, uv resum men, hora
+  @Input() maxsemanal; // contiene el array de JSON de maxsemanal conformado: ubicacion, uv max sem, hora
+  @Input() maxmensual; // contiene el array de JSON de maxmensual conformado: ubicacion, uv max men, hora
+  // public moment = require('moment'); // en la page 3 ya se define el campo hora en formato momento para todos los Input
   public lineChartData: Array<any>  = [
     { data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: 'Sensor 1' },
     { data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: 'Sensor 2' },
     { data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: 'Sensor 3' },
-    { data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: 'Sensor 4' },
-    { data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: 'Sensor 5' },
+    // { data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: 'Sensor 4' },
+    // { data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: 'Sensor 5' },
   ];
 
   public lineChartLabels: Array<any> = ['7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'];
@@ -43,8 +44,7 @@ export class LineaComponent implements OnInit  {
  public lineChartColors: Array<any> = [];
  public lineChartLegend = true;
  public lineChartType = 'line';
-
- constructor(private dataService: DataService) {
+ constructor( private dataService: DataService) {
 
  }
 
@@ -69,25 +69,62 @@ export class LineaComponent implements OnInit  {
     ];
   }
   public actualizarSemana(): void {
-     const start = new Date();
-     start.setDate(start.getDate() - 19);
-     let x = 1;
-     let ubicaciones: string[] = []; // guarda las ubicaciones distinct
-     let i = 0;
-     let j = 0;
-     ubicaciones = this.sinRepetidos(this.semanal);
-     this.actualizarLabels();
-     this.lineChartLabels = [];
-     while (x < 21) { // en total ponemos 20 datos debido a que es la longitud max del labels
+    if (this.semanal.length !== 0 ) { // verificamos si existe muestras en la fecha del calendario seleccionada
+      this. lineChartOptions = {
+        responsive: true,
+        scales: {
+          yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Radición UV'
+            }
+          }],
+          xAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Dias de la semana'
+            }
+          }]
+        }
+      };
+    } else {
+      this. lineChartOptions = {
+        responsive: true,
+        scales: {
+          yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Radición UV'
+            }
+          }],
+          xAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Hora - Dia - Mes'
+            }
+          }]
+        }
+      };
+    }
+    const start = new Date();
+    start.setDate(start.getDate() - 30);
+    let x = 1;
+    let ubicaciones: string[] = []; // guarda las ubicaciones distinct
+    let i = 0;
+    let j = 0;
+    ubicaciones = this.sinRepetidos(this.semanal);
+    this.actualizarLabels();
+    this.lineChartLabels = [];
+    while (x < 31) { // en total ponemos 20 datos debido a que es la longitud max del labels
       this.lineChartLabels.push(start.getDate()); // usamos date en vez de enteros xq no sabemos si es 30 o 31 el mes
-      start.setDate(start.getDate() + 1);
+      start.setDate(start.getDate() + 1); // se aumenta los dias hasta completar el lineChartLabels
       x++;
      }
-     for (const ubicacion of ubicaciones) {  // todo estos lazos sirven para poner cada resumen en su ubicacion respectiva
+    for (const ubicacion of ubicaciones) {  // todo estos lazos sirven para poner cada resumen en su ubicacion respectiva
        for (const marcador of this.semanal) { // se protege a los valore uv, para que no se mezclen entre marcadores
          this.lineChartData[i].label = ubicacion; // referenciamos los data a la ubicacion correspond
          if (marcador.ubicacion === ubicacion) {  // condicional para poner cada uv en la ubi correspondiente
-          label: while (j < 20) {  // este lazo permite poner cada marcador en su dia correspondiente
+          label: while (j < 31) {  // este lazo permite poner cada marcador en su dia correspondiente
               if (marcador.hora.date() === this.lineChartLabels[j] ) {
                 this.lineChartData[i].data[j] = marcador.uv;
                 break label; // solo hace break al lazo while no a todos los lazos
@@ -101,8 +138,45 @@ export class LineaComponent implements OnInit  {
     }
   }
   public MaxSemana(): void {
+    if (this.maxsemanal.length !== 0 ) { // verificamos si existe muestras en la fecha del calendario seleccionada
+      this. lineChartOptions = {
+        responsive: true,
+        scales: {
+          yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Radición UV'
+            }
+          }],
+          xAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Dias de la semana'
+            }
+          }]
+        }
+      };
+    } else {
+      this. lineChartOptions = {
+        responsive: true,
+        scales: {
+          yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Radición UV'
+            }
+          }],
+          xAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Hora - Dia - Mes'
+            }
+          }]
+        }
+      };
+    }
     const start = new Date();
-    start.setDate(start.getDate() - 19);
+    start.setDate(start.getDate() - 30);
     let x = 1;
     this.lineChartLabels = [];
     let ubicaciones: string[] = []; // guarda las ubicaciones distinct
@@ -110,7 +184,7 @@ export class LineaComponent implements OnInit  {
     let j = 0;
     ubicaciones = this.sinRepetidos(this.maxsemanal);
     this.actualizarLabels();
-    while (x < 21) { // en total ponemos 20 datos debido a que es la longitud max del labels
+    while (x < 31) { // en total ponemos 20 datos debido a que es la longitud max del labels
      this.lineChartLabels.push(start.getDate());
      start.setDate(start.getDate() + 1);
      x++;
@@ -119,7 +193,7 @@ export class LineaComponent implements OnInit  {
       for (const marcador of this.maxsemanal) { // se protege a los valore uv, para que no se mezclen entre marcadores
         this.lineChartData[i].label = ubicacion; // referenciamos los data a la ubicacion correspond
         if (marcador.ubicacion === ubicacion) {  // condicional para poner cada uv en la ubi correspondiente
-         label: while (j < 20) {  // este lazo permite poner cada marcador en su dia correspondiente
+         label: while (j < 31) {  // este lazo permite poner cada marcador en su dia correspondiente
              if (marcador.hora.date() === this.lineChartLabels[j] ) {
                this.lineChartData[i].data[j] = marcador.uv;
                break label; // solo hace break al lazo while no a todos los lazos
@@ -133,6 +207,43 @@ export class LineaComponent implements OnInit  {
    }
  }
   public actualizarMes(): void {
+    if (this.mensual.length !== 0 ) { // verificamos si existe muestras en la fecha del calendario seleccionada
+      this. lineChartOptions = {
+        responsive: true,
+        scales: {
+          yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Radición UV'
+            }
+          }],
+          xAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Meses'
+            }
+          }]
+        }
+      };
+    } else {
+      this. lineChartOptions = {
+        responsive: true,
+        scales: {
+          yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Radición UV'
+            }
+          }],
+          xAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Hora - Dia - Mes'
+            }
+          }]
+        }
+      };
+    }
     this.lineChartLabels = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
     let ubicaciones: string[] = []; // guarda las ubicaciones distinct
     let i = 0;
@@ -191,6 +302,43 @@ export class LineaComponent implements OnInit  {
 }
 
 public MaxMes(): void {
+  if (this.maxmensual.length !== 0 ) { // verificamos si existe muestras en la fecha del calendario seleccionada
+    this. lineChartOptions = {
+      responsive: true,
+      scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Radición UV'
+          }
+        }],
+        xAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Meses'
+          }
+        }]
+      }
+    };
+  } else {
+    this. lineChartOptions = {
+      responsive: true,
+      scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Radición UV'
+          }
+        }],
+        xAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Hora - Dia - Mes'
+          }
+        }]
+      }
+    };
+  }
   this.lineChartLabels = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
   let ubicaciones: string[] = []; // guarda las ubicaciones distinct
   let i = 0;
@@ -248,7 +396,139 @@ public MaxMes(): void {
 }
 }
 
-  public actualizarData( ): void { // se agrega los nuevos uv a la grafica dinamica
+  public actualizarHoy( ): void { // se agrega los nuevos uv a la grafica dinamica
+    if (this.hoy.length !== 0 ) { // verificamos si existe muestras en la fecha del calendario seleccionada
+      this. lineChartOptions = {
+        responsive: true,
+        scales: {
+          yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Radición UV'
+            }
+          }],
+          xAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: `Horas de hoy ${this.hoy[0].hora.format('LL')}`
+            }
+          }]
+        }
+      };
+    } else {
+      this. lineChartOptions = {
+        responsive: true,
+        scales: {
+          yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Radición UV'
+            }
+          }],
+          xAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Hora - Dia - Mes'
+            }
+          }]
+        }
+      };
+    }
+    this.lineChartLabels = ['7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'];
+    let ubicaciones: string[] = []; // guarda las ubicaciones distinct
+    let i = 0;
+    let x = 0;
+    ubicaciones = this.sinRepetidos(this.hoy);
+    this.actualizarLabels();
+    for (const ubicacion of ubicaciones) {  // todo estos lazos sirven para poner cada resumen en su ubicacion respectiva
+      for (const marcador of this.hoy) { // se protege a los valore uv, para que no se mezclen entre marcadores
+        this.lineChartData[i].label = ubicacion; // escoge una ubicacion para rellenar en ella los datos
+        if (marcador.ubicacion === ubicacion) {  // condicional para poner cada uv en la ubi correspondiente
+          x = marcador.hora.hour() + 5; // si reseteamos directamente marcador.hora se queda asi la proxima vez
+          switch (x) {  // utilizamos este switch para ordenar cada muestra en su respectiva hora, en caso que no haya muestra para una hora se pondra el valor de 0
+            case 7:
+                this.lineChartData[i].data[0] = marcador.uv;
+                break;
+            case 8:
+                this.lineChartData[i].data[1] = marcador.uv;
+                break;
+            case 9:
+                this.lineChartData[i].data[2] = marcador.uv;
+                break;
+            case 10:
+                this.lineChartData[i].data[3] = marcador.uv;
+                break;
+            case 11:
+                this.lineChartData[i].data[4] = marcador.uv;
+                break;
+            case 12:
+                this.lineChartData[i].data[5] = marcador.uv;
+                break;
+            case 13:
+                this.lineChartData[i].data[6] = marcador.uv;
+                break;
+            case 14:
+                this.lineChartData[i].data[7] = marcador.uv;
+                break;
+            case 15:
+                this.lineChartData[i].data[8] = marcador.uv;
+                break;
+            case 16:
+                this.lineChartData[i].data[9] = marcador.uv;
+                break;
+            case 17:
+                this.lineChartData[i].data[10] = marcador.uv;
+                break;
+            case 18:
+                this.lineChartData[i].data[11] = marcador.uv;
+                break;
+            default:
+                break;
+          }
+        }
+      }
+      i++;
+    }
+  }
+
+  public actualizarRadiacion( ): void { // se agrega los nuevos uv a la grafica dinamica
+    if (this.datos.length !== 0 ) { // verificamos si existe muestras en la fecha del calendario seleccionada
+      this. lineChartOptions = {
+        responsive: true,
+        scales: {
+          yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Radición UV'
+            }
+          }],
+          xAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: `Horas de ${this.datos[0].hora.format('LL')}`
+            }
+          }]
+        }
+      };
+    } else {
+      this. lineChartOptions = {
+        responsive: true,
+        scales: {
+          yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Radición UV'
+            }
+          }],
+          xAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Hora - Dia - Mes'
+            }
+          }]
+        }
+      };
+    }
     this.lineChartLabels = ['7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'];
     let ubicaciones: string[] = []; // guarda las ubicaciones distinct
     let i = 0;
@@ -305,18 +585,16 @@ public MaxMes(): void {
       i++;
     }
   }
-  // events
-  public chartClicked(e: any): void {
-    console.log(e);
+
+  public chartClicked( e: any): void {
   }
 
-  public chartHovered(e: any): void {
-    console.log(e);
-  }
-
-  ngOnInit() {
+    ngOnInit() {
+    this.dataService.dibujarCalendar.subscribe(() => {
+      this.actualizarRadiacion();
+    });
     this.dataService.dibujarHoy.subscribe(() => {
-      this.actualizarData();
+      this.actualizarHoy();
     });
     this.dataService.dibujarSemana.subscribe(() => {
       this.actualizarSemana();
