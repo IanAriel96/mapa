@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="2" id="com.ianbaquero.radiacion" version="2.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="3" id="com.ianbaquero.radiacion" version="3.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Radiacion</name>
     <description>An awesome Ionic/Cordova app.</description>
-    <author email="ianbd_96@hotmail.com" href="http://fernando-herrera.com/">Ian Baquero</author>
+    <author email="ianbd_96@hotmail.com" href="https://fernando-herrera.com/">Ian Baquero</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />

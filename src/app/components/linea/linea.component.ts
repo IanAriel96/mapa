@@ -75,6 +75,7 @@ export class LineaComponent implements OnInit  {
     let ubicaciones: string[] = []; // guarda las ubicaciones distinct
     let i = 0;
     let x = 0;
+    let temp = 0; // variable para escoger solo la primera hora sin minutos en caso de repetirse por las muestras de media hora
     if (this.datos.length !== 0 ) { // verificamos si existe muestras en la fecha del calendario seleccionada
       ubicaciones = this.sinRepetidos(this.datos);
       this.actualizarLabels(ubicaciones.length);
@@ -119,49 +120,53 @@ export class LineaComponent implements OnInit  {
         this.lineChartData[i].label = ubicacion; // escoge una ubicacion para rellenar en ella los datos
         if (marcador.ubicacion === ubicacion) {  // condicional para poner cada uv en la ubi correspondiente
           x = marcador.hora.hour() + 5; // si reseteamos directamente marcador.hora se queda asi la proxima vez
-          switch (x) {  // utilizamos este switch para ordenar cada muestra en su respectiva hora, en caso que no haya muestra para una hora se pondra el valor de 0
-            case 7:
-                this.lineChartData[i].data[0] = marcador.uv;
-                break;
-            case 8:
-                this.lineChartData[i].data[1] = marcador.uv;
-                break;
-            case 9:
-                this.lineChartData[i].data[2] = marcador.uv;
-                break;
-            case 10:
-                this.lineChartData[i].data[3] = marcador.uv;
-                break;
-            case 11:
-                this.lineChartData[i].data[4] = marcador.uv;
-                break;
-            case 12:
-                this.lineChartData[i].data[5] = marcador.uv;
-                break;
-            case 13:
-                this.lineChartData[i].data[6] = marcador.uv;
-                break;
-            case 14:
-                this.lineChartData[i].data[7] = marcador.uv;
-                break;
-            case 15:
-                this.lineChartData[i].data[8] = marcador.uv;
-                break;
-            case 16:
-                this.lineChartData[i].data[9] = marcador.uv;
-                break;
-            case 17:
-                this.lineChartData[i].data[10] = marcador.uv;
-                break;
-            case 18:
-                this.lineChartData[i].data[11] = marcador.uv;
-                break;
-            default:
-                break;
+          if (x !== temp) { // con esto garantizamos q no tome la hora con 30 min extras
+            switch (x) {  // utilizamos este switch para ordenar cada muestra en su respectiva hora, en caso que no haya muestra para una hora se pondra el valor de 0
+              case 7:
+                  this.lineChartData[i].data[0] = marcador.uv;
+                  break;
+              case 8:
+                  this.lineChartData[i].data[1] = marcador.uv;
+                  break;
+              case 9:
+                  this.lineChartData[i].data[2] = marcador.uv;
+                  break;
+              case 10:
+                  this.lineChartData[i].data[3] = marcador.uv;
+                  break;
+              case 11:
+                  this.lineChartData[i].data[4] = marcador.uv;
+                  break;
+              case 12:
+                  this.lineChartData[i].data[5] = marcador.uv;
+                  break;
+              case 13:
+                  this.lineChartData[i].data[6] = marcador.uv;
+                  break;
+              case 14:
+                  this.lineChartData[i].data[7] = marcador.uv;
+                  break;
+              case 15:
+                  this.lineChartData[i].data[8] = marcador.uv;
+                  break;
+              case 16:
+                  this.lineChartData[i].data[9] = marcador.uv;
+                  break;
+              case 17:
+                  this.lineChartData[i].data[10] = marcador.uv;
+                  break;
+              case 18:
+                  this.lineChartData[i].data[11] = marcador.uv;
+                  break;
+              default:
+                  break;
+            }
+            temp = x; // con esto garantizamos q no tome la hora con 30 min extras
           }
         }
       }
       i++;
+      temp = 0; // reseteamos a temp
     }
   }
   public actualizarSemana(): void {
@@ -496,6 +501,7 @@ public MaxMes(): void {
     let ubicaciones: string[] = []; // guarda las ubicaciones distinct
     let i = 0;
     let x = 0;
+    let temp = 0;
     if (this.hoy.length !== 0 ) { // verificamos si existe muestras en la fecha del calendario seleccionada
       ubicaciones = this.sinRepetidos(this.hoy);
       this.actualizarLabels(ubicaciones.length);
@@ -541,49 +547,53 @@ public MaxMes(): void {
         this.lineChartData[i].label = ubicacion; // escoge una ubicacion para rellenar en ella los datos
         if (marcador.ubicacion === ubicacion) {  // condicional para poner cada uv en la ubi correspondiente
           x = marcador.hora.hour() + 5; // si reseteamos directamente marcador.hora se queda asi la proxima vez
-          switch (x) {  // utilizamos este switch para ordenar cada muestra en su respectiva hora, en caso que no haya muestra para una hora se pondra el valor de 0
-            case 7:
-                this.lineChartData[i].data[0] = marcador.uv;
-                break;
-            case 8:
-                this.lineChartData[i].data[1] = marcador.uv;
-                break;
-            case 9:
-                this.lineChartData[i].data[2] = marcador.uv;
-                break;
-            case 10:
-                this.lineChartData[i].data[3] = marcador.uv;
-                break;
-            case 11:
-                this.lineChartData[i].data[4] = marcador.uv;
-                break;
-            case 12:
-                this.lineChartData[i].data[5] = marcador.uv;
-                break;
-            case 13:
-                this.lineChartData[i].data[6] = marcador.uv;
-                break;
-            case 14:
-                this.lineChartData[i].data[7] = marcador.uv;
-                break;
-            case 15:
-                this.lineChartData[i].data[8] = marcador.uv;
-                break;
-            case 16:
-                this.lineChartData[i].data[9] = marcador.uv;
-                break;
-            case 17:
-                this.lineChartData[i].data[10] = marcador.uv;
-                break;
-            case 18:
-                this.lineChartData[i].data[11] = marcador.uv;
-                break;
-            default:
-                break;
+          if (x !== temp) { // con esto garantizamos q no tome la hora con 30 min extras
+            switch (x) {  // utilizamos este switch para ordenar cada muestra en su respectiva hora, en caso que no haya muestra para una hora se pondra el valor de 0
+              case 7:
+                  this.lineChartData[i].data[0] = marcador.uv;
+                  break;
+              case 8:
+                  this.lineChartData[i].data[1] = marcador.uv;
+                  break;
+              case 9:
+                  this.lineChartData[i].data[2] = marcador.uv;
+                  break;
+              case 10:
+                  this.lineChartData[i].data[3] = marcador.uv;
+                  break;
+              case 11:
+                  this.lineChartData[i].data[4] = marcador.uv;
+                  break;
+              case 12:
+                  this.lineChartData[i].data[5] = marcador.uv;
+                  break;
+              case 13:
+                  this.lineChartData[i].data[6] = marcador.uv;
+                  break;
+              case 14:
+                  this.lineChartData[i].data[7] = marcador.uv;
+                  break;
+              case 15:
+                  this.lineChartData[i].data[8] = marcador.uv;
+                  break;
+              case 16:
+                  this.lineChartData[i].data[9] = marcador.uv;
+                  break;
+              case 17:
+                  this.lineChartData[i].data[10] = marcador.uv;
+                  break;
+              case 18:
+                  this.lineChartData[i].data[11] = marcador.uv;
+                  break;
+              default:
+                  break;
+            }
+            temp = x; // con esto garantizamos q no tome la hora con 30 min extras
           }
         }
       }
       i++;
+      temp = 0; // reseteamos a temp
     }
   }
 

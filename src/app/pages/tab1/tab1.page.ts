@@ -45,7 +45,7 @@ export class Tab1Page implements OnInit {
       }
       this.dibujarPoligono(this.marcadoresBase, this.poligonos);
     });
-    const contador = interval(10000); // 1800000 es cada 30 min y 3600000 es 1 hora
+    const contador = interval(30000); // 1800000 es cada 30 min y 3600000 es 1 hora para las muestras recientes
     contador.subscribe((n) => {
       this.funcionAsync().then(result => console.log(result)).catch(e => console.log (`Error capturadoo:${e}`));
     });

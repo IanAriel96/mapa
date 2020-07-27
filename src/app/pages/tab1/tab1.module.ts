@@ -18,7 +18,7 @@ import { MaterialModule } from '../../material.module';
     MaterialModule,
     RouterModule.forChild([{ path: '', component: Tab1Page }]),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBZhQOueM3jLsbHh6ZkayTlaOGCnHiCfjY'
+      apiKey: 'AIzaSyARpSC3ntPSudkkeppTpFF1pTi2m-kVkRk'
       // libraries: ['places', 'drawing', 'geometry']
     })
   ],
