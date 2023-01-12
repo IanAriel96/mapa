@@ -46,7 +46,7 @@
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "ng2-charts": "^2.3.0",
-    "ngx-papaparse": "^3.0.4",
+    "ngx-papaparse": "^6.0.2",
     "rxjs": "^6.5.4",
     "set": "1.1.1",
     "set-interval-async": "1.0.29",
